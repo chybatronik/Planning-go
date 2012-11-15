@@ -103,7 +103,7 @@ func task(w http.ResponseWriter, r *http.Request) {
 	//fmt.Printf("Path:%v\n", u.Path)
 	//fmt.Printf("Query.executed:%v\n", q.Get("executed"))
 	if len(q) > 0 {
-		if len(q.Get("executed")) > 0{
+		if len(q.Get("executed")) > 0 {
 			executed, err = strconv.ParseBool(q.Get("executed"))
 			if err != nil {
 				fmt.Printf("Error  strconv.ParseBool:%v\n", err)
@@ -111,7 +111,7 @@ func task(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("executed:%v\n", executed)
 		}
 
-		if len(q.Get("direction")) > 0{
+		if len(q.Get("direction")) > 0 {
 			direction64, err := strconv.ParseInt(q.Get("direction"), 10, 32)
 			direction = int(direction64)
 			if err != nil {
@@ -125,7 +125,7 @@ func task(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("mas_url:%v %d \n", mas_url, len(mas_url))
 
-	if mas_url[0] == "task" && direction == 0 && mas_url[1] == ""{
+	if mas_url[0] == "task" && direction == 0 && mas_url[1] == "" {
 		switch r.Method {
 		case "GET":
 			resposible, _ = json.Marshal(Task_list)

@@ -18,7 +18,7 @@ func convert_Task(tasks []Task) []*Task {
 	return result
 }
 
-func convert_back_Task(tasks []*Task) []Task{
+func convert_back_Task(tasks []*Task) []Task {
 	//
 	var result []Task
 	for i, _ := range tasks {
@@ -46,7 +46,7 @@ func convert_Directions(directions []Direction) []*Direction {
 	}
 	return result
 }
-func convert_back_Directions(directions []*Direction) []Direction{
+func convert_back_Directions(directions []*Direction) []Direction {
 	//
 	var result []Direction
 	for i, _ := range directions {

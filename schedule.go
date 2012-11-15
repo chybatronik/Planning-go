@@ -189,9 +189,9 @@ func PrioritySchedule() []Schedule {
 	//fmt.Printf("len(Direction_list):%d\n", len(Direction_list))
 
 	for _, val := range Direction_list {
-		if val.IsWork && 
-			(len(GetTasks(val.Id, false)) > 0) && 
-			is_date_in_WhenWork(time.Now().Format("15:04"), val.WhenWork){
+		if val.IsWork &&
+			(len(GetTasks(val.Id, false)) > 0) &&
+			is_date_in_WhenWork(time.Now().Format("15:04"), val.WhenWork) {
 			directions_list_filtering = append(directions_list_filtering, val)
 		}
 	}
@@ -216,7 +216,7 @@ func PrioritySchedule() []Schedule {
 			//
 			howlongDay_direct, err := time.ParseDuration(direct.HowLongDay)
 			if err != nil {
-				fmt.Printf("howlongDay_direct_%v: %v\n",direct.Name,  err)
+				fmt.Printf("howlongDay_direct_%v: %v\n", direct.Name, err)
 			}
 			map_HowLongDay[direct.Id] = what_duration_direction_done(direct.Id, time.Now())
 
@@ -268,7 +268,7 @@ func SeachLastDirectionTaskIsDone() int {
 			id = val.Direction_Id
 		}
 	}
-	if time_dt.Day() != time.Now().Day(){
+	if time_dt.Day() != time.Now().Day() {
 		return 0
 	}
 	return id
@@ -283,7 +283,7 @@ func Get_Schedule() []Schedule {
 	//fmt.Printf("last_id_direction:%d\n", last_id_direction)
 	temp := make(map[int]int)
 	m15, _ := time.ParseDuration("15m")
-	now := time.Now().Add(-1*m15)
+	now := time.Now().Add(-1 * m15)
 	hour_now, minute_now := now.Hour(), now.Minute()
 	if minute_now > 35 {
 		hour_now += 1
@@ -315,7 +315,7 @@ func Get_Schedule() []Schedule {
 		}
 	}
 	//fmt.Printf("last_do %d %d %v\n",last_id_direction, last_result[0][0].Task.Direction_Id, last_result )
-	if len(last_result) > 1  && len(last_result[0])>0 && len(last_result[1])>0{
+	if len(last_result) > 1 && len(last_result[0]) > 0 && len(last_result[1]) > 0 {
 		if last_result[0][0].Task.Direction_Id == last_id_direction {
 			temp := last_result[1]
 			last_result[1] = last_result[0]
