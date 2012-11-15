@@ -465,7 +465,11 @@ function TaskEditCtrl ($scope, $location, Task, Direction, $routeParams) {
 
 function ScheduleCtrl ($scope, $routeParams, Schedule, Statistic) {
 	// body...
-	$scope.list = Schedule.query();
+	$scope.list = Schedule.query({}, function() {
+		if($scope.list[0][0] +$scope.list[1][0] + $scope.list[2][0]+ $scope.list[3][0] == 'null'){
+			$scope.list= [] 
+		}
+	});
 	$scope.spisok_stat = Statistic.query();
 
 	$scope.completed = function(id, completed) {

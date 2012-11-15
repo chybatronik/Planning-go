@@ -352,6 +352,8 @@ func Get_Schedule() []Schedule {
 			}
 		}
 	}
-
+	if len(itog) <1{
+		fmt.Printf("itog:%v", itog)
+	}
 	return itog
 }
