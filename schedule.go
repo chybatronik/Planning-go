@@ -341,7 +341,8 @@ func Get_Schedule() []Schedule {
 					fmt.Printf("HowLong: %v\n", err)
 				}
 
-				if HowLong > map_HowLongDay[schedule.Task.Direction_Id] {
+				if HowLong > map_HowLongDay[schedule.Task.Direction_Id] && 
+					is_date_in_WhenWork(dt.Format("15:04"), GetDirection(schedule.Task.Direction_Id).WhenWork){
 					schedule.Start = fmt.Sprintf("%d:%d", dt.Hour(), dt.Minute())
 					itog = append(itog, schedule)
 
