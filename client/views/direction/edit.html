@@ -1,0 +1,68 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Planning</a>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          Logged in as <a href="#" class="navbar-link">Username</a>
+        </p>
+        <ul class="nav" style="margin-left:6em">
+          <li class="active"><a href="#/task">Task</a></li>
+          <li><a href="#/schedule">Schedule</a></li>
+          <li><a href="#/direction">Direction</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top:4em">
+	<div class="row-fluid">
+		<div class="span6 offset2">
+			<a class="btn btn-mini" href="#/direction"> Назад к списку</a>
+
+			<table class="table table-condensed" ui-keypress="{ 13 : 'save()' }">
+			  <thead>
+			    <tr>
+			      <th>Название</th>
+			      <th>Значение</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+
+			    <tr>
+			      <td>Name</td>
+			      <td><input type="text"  ng-model="item.Name"></input></td>
+			    </tr>
+
+			 	<tr>
+			      <td>Приоритет</td>
+			      <td><input type="number" ng-model="item.Priority"></input></td>
+			    </tr>
+
+			    <tr>
+			      <td>Как долго в день</td>
+			      <td><input type="text" ng-model="item.HowLongDay"></input></td>
+			    </tr>
+
+			    <tr ng-repeat="when in item.WhenWork">
+			      <td>Работает:</td>
+			      <td><input type="time"  ng-model="when.Start"></input></td>
+			      <td><input type="time"  ng-model="when.Stop"></input></td>
+			      <td><a ng-click="remove_WhenWork($index)"><i class="icon-remove"></i></a></td>
+			    </tr>
+			    <tr>
+			    	<td><a style="padding-left:160px" ng-click="Add_WhenWork()"><i class="icon-plus"></i></a></td>
+			    </tr>
+
+			  </tbody>
+			</table>
+			<button class="btn btn-small" ng-click="save()">Save</button>
+		</div>
+	</div>
+</div>

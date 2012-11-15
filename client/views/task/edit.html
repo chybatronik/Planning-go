@@ -1,0 +1,70 @@
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Planning</a>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          Logged in as <a href="#" class="navbar-link">Username</a>
+        </p>
+        <ul class="nav" style="margin-left:6em">
+          <li class="active"><a href="#/task">Task</a></li>
+          <li><a href="#/schedule">Schedule</a></li>
+          <li><a href="#/direction">Direction</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top:4em">
+
+	<div class="row-fluid">
+		<div class="span6 offset2">
+
+			<a class="btn btn-mini" href="#/task/direction/{{item.Direction_Id}}"> Назад к списку задач</a>
+
+			  <form style="margin-top:40px;" ui-keypress="{ 13 : 'save()' }">
+			  	<label>Name</label>
+			  	<input style="margin-left:40px" type="text" class="span7" ng-model="item.Name"></input>
+			  	<label>Duration</label>
+			  	<input style="margin-left:40px"  type="text" class="span1" ng-model="item.Duration"></input>
+			  	<label>Direction</label>
+			  	<h5 style="margin-left:40px">{{item.Direction}}</h5>
+			  	<p class="text-warning" style="margin-left:40px">изменит на </p>
+			  	<select style="margin-left:40px" ng-model="cur" ng-change="change_direction()">
+				 	 <option ng-repeat="lt in direction_list" value="{{lt.Id}}">{{lt.Name}}</option>
+					</select>
+
+					<label>Priority</label>
+				  <input style="margin-left:40px"  type="number" class="span1" ng-model="item.PriorityTask"></input>
+				  	
+				  <label>Повторения</label>
+				  <input style="margin-left:40px" type="checkbox" class="span1" ng-model="item.ActiveRepeat"></input>
+
+				  <label style="margin-left:40px" >WhatWeekyDayRestore</label>
+				  <!-- <input style="margin-left:80px"  type="text" class="span9" ng-model="item.Repeat.WhatWeekyDayRestore"></input> -->
+
+				  <select data-placeholder="What days do you want to do it?" style="width:350px;" multiple class="chzn-select" tabindex="8" ng-model="item.Repeat.WhatWeekyDayRestore" style="margin-left:80px">
+			          <option value=""></option>
+			          <option>Monday</option>
+			          <option>Tuesday</option>
+			          <option>Wednesday</option>
+			          <option>Thursday</option>
+			          <option>Friday</option>
+			          <option>Saturday</option>
+		        </select>
+					  
+			  </form>
+
+			<button class="btn btn-small" ng-click="save()">Save</button>
+		</div>
+	</div>
+</div>
+	<script>
+	</script>

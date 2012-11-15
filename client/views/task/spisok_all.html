@@ -1,0 +1,60 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Planning</a>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          Logged in as <a href="#" class="navbar-link">Username</a>
+        </p>
+        <ul class="nav" style="margin-left:6em">
+          <li class="active"><a href="#/task">Task</a></li>
+          <li><a href="#/schedule">Schedule</a></li>
+          <li><a href="#/direction">Direction</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top:4em" ng-init="predicate='Priority';reverse=true">
+	<div class="row-fluid">
+		<div class="span3 bs-docs-sidebar" style="width:150px;height:230px">
+        	<ul class="nav nav-list bs-docs-sidenav affix">
+        		<li><a href="#/task/label" ng-class="{disabled:(direction_id==-1)}"><i class="icon-star"></i><i class="icon-chevron-right"></i></a></li>
+           		<li  ng-repeat="dir in Direction_list| orderBy:predicate:reverse" ng-class="{active:(direction_id==dir.Id)}"><a href="#/task/direction/{{dir.Id}}" ><i class="icon-chevron-right"></i>{{dir.Name}}</a></li> 
+	        </ul>
+	    </div>
+		<div class="span10">
+			
+			<table class="table table-condensed table-hover" ng-init="predicate='Priority';reverse=true">
+			  <thead>
+			    <tr>
+			      <th></th>
+			      <th width="2%"></th>
+			      <th>Название</th>
+			      <th>Время</th>
+			      <th>Направление</th>
+			      <th></th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr ng-repeat="lt in list| orderBy:predicate:reverse"  ng-class="{info:lt.Label}">
+			      <td ><input type="checkbox" ng-model="lt.IsDone" ng-change="completed(lt.Id, lt.IsDone)"></input></td>
+			      <td><a ng-click="set_label(lt.Id)"><i ng-class="{'icon-star':lt.Label, 'icon-star-empty':!lt.Label}" ></i></a></td>
+			      <td ng-class="{done:lt.IsDone}">{{lt.Name}}</td>
+			      <td>{{lt.Duration}}</td>
+			      <td><code>{{lt.Direction}}</code></td>
+			      <td><a href="#/task/edit/{{lt.Id}}"><i class="icon-pencil"></i></a></td>
+			      <td><a ng-click="Del(lt.Id)"><i class="icon-remove"></i></a></td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>
