@@ -33,8 +33,7 @@
 			<table class="table table-condensed table-hover" ng-init="predicate='Priority';reverse=true">
 			  <thead>
 			    <tr>
-			      <th width="2%"></th>
-			      <th width="15%"></th>
+			      <th width="3%"></th>
 			      <th>Название</th>
 			      <th width="11%">Сделано</th>
 			      <th width="20%">Предстоит</th>
@@ -46,8 +45,6 @@
 			    <tr ng-repeat="lt in list" ng-class="{warning:lt.IsWork}">
 
 			      <td><input type="checkbox" ng-model="lt.IsWork" ng-change="change_work(lt.Id, lt.IsWork)"></input></td>	
-
-			      <td><a ng-click="change_priority(lt.Id, '+')" style="padding:1px;margin:5px"><i class="icon-arrow-up"></i></a><a ng-click="change_priority(lt.Id, '-')" style="padding:1px;margin:5px" ng-click=""><i class="icon-arrow-down"></i></a></td>
 
 			      <td ng-class="{done:!lt.IsWork}"><code style="font-size: 16px;"><a href="#/task/direction/{{lt.Id}}">{{lt.Name}}</a></code></td>
 

@@ -31,7 +31,9 @@
 	        	<li  ng-repeat="dir in Direction_list" ng-class="{active:(direction_id==dir.Id)}"><a href="#/task/direction/{{dir.Id}}" ><i class="icon-chevron-right"></i>{{dir.Name}}</a></li> 
 	        </ul>
 	    </div>
+
 		<div class="span10 ">
+			<blockquote style="margin-left:5em"><em>{{cur_Direction.Description}}</em></blockquote>
 			<form class="form-horizontal" ui-keydown="{'ctrl-enter': 'Add_fast()', '13' : 'Add()' }">
 				<div class="control-group">
 				
@@ -45,22 +47,12 @@
 					</ul>
 					<a class="btn"  style="margin-left:2.1em" ng-click="Add_fast()"><i class="icon-chevron-up"></i></a>
 					<a class="btn" ng-click="Add()"><i class="icon-chevron-down"></i>Add</a>
-					<label class="checkbox" style="margin-left:0px">
+					<label class="checkbox pull-right" style="margin-left:0px">
 					    <input type="checkbox" ng-model="executed" ng-change="show_executed()"> Show executed
 					</label>
 				</div>
 			</form>
 			<table class="table table-condensed table-hover" ng-init="predicate='Priority';reverse=true" >
-<!-- 			  <thead>
-			    <tr>
-			      <th width="2%"></th>
-			      <th width="2%"></th>
-			      <th>Название</th>
-			      <th width="2%">Время</th>
-			      <th width="2%"></th>
-			      <th width="2%"></th>
-			    </tr>
-			  </thead> -->
 			  <tbody ui-sortable="{update: update_priority, axis: 'y'}" ng-model="list">
 			    <tr ng-repeat="lt in list"  ng-class="{info:lt.Label}">
 			      <td width="2%"><input type="checkbox" ng-model="lt.IsDone" ng-change="completed(lt.Id, lt.IsDone)"></input></td>

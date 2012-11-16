@@ -23,10 +23,10 @@
 
 <div class="container-fluid" style="margin-top:4em">
 	<div class="row-fluid">
-		<div class="span6 offset2">
-			<a class="btn btn-mini" href="#/direction"> Назад к списку</a>
+		<div class="span6 offset2" style="margin-top:20px">
+			<a class="btn btn-mini" href="#/direction"> <i class="icon-arrow-left"></i></a>
 
-			<table class="table table-condensed" ui-keypress="{ 13 : 'save()' }">
+			<table class="table table-condensed" ui-keydown="{ 'ctrl-enter' : 'save()' }" style="margin-top:20px">
 			  <thead>
 			    <tr>
 			      <th>Название</th>
@@ -60,6 +60,10 @@
 			    	<td><a style="padding-left:160px" ng-click="Add_WhenWork()"><i class="icon-plus"></i></a></td>
 			    </tr>
 
+			    <tr>
+			      <td>Описание проекта</td>
+			      <td><textarea type="text" ng-model="item.Description"></textarea></td>
+			    </tr>
 			  </tbody>
 			</table>
 			<button class="btn btn-small" ng-click="save()">Save</button>

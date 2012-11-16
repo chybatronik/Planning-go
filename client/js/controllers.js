@@ -244,7 +244,14 @@ function TaskSpisokDirectionCtrl ($scope, $routeParams, $location, Direction, Ta
 	$scope.executed = false
 	//$scope.list = Tasks_Direction.query({id:$routeParams.id, executed:""+$scope.executed+""});
 	$scope.list = Task.query({direction:$routeParams.id, executed:""+$scope.executed+""});
-	$scope.Direction_list = Direction.query();
+	$scope.Direction_list = Direction.query({}, function() {
+		for (var i = 0; i < $scope.Direction_list.length; i++) {
+			if ($routeParams.id == $scope.Direction_list[i].Id){
+				$scope.cur_Direction = $scope.Direction_list[i]
+			}
+		};
+		
+	});
 	$scope.direction_id = $routeParams.id
 	
 	$scope.query_add_time = "0.5h"
@@ -271,72 +278,6 @@ function TaskSpisokDirectionCtrl ($scope, $routeParams, $location, Direction, Ta
 			$scope.query_add_time = (parseFloat($scope.query_add_time.split("h")[0]) - 0.5) + "h"
 		}
 	};
-
-	// $scope.change_priority = function(list_id, plus_or_minus) {
-	// 	//
-	// 	var list = $filter('orderBy')($scope.list,'Priority', true)
-	// 	console.log("id", list_id, list)
-
-	// 	var user = Task.get({id:list_id}, function() {
-	// 		console.log("Task.get", user, user.PriorityTask)
-	// 		if(plus_or_minus == "+"){
-	// 			var index = -1
-	// 			var value = 0
-	// 			for (var i = list.length - 1; i >= 0; i--) {
-	// 				if (list[i].Id == list_id){
-	// 					index = i
-	// 				}
-	// 			};
-	// 			if (index > 0){
-	// 				var temp = Task.get({id:list[index - 1].Id}, function() {
-	// 					//
-	// 					value = temp.PriorityTask
-	// 					temp.PriorityTask = user.PriorityTask
-	// 					temp.$save({id:list[index - 1].Id},  function(){ 
-	// 						// 
-	// 						user.PriorityTask = value
-	// 						user.$save({id:list_id},  function(){ 
-	// 							//
-	// 							$scope.list = Task.query({direction:$routeParams.id, executed:""+$scope.executed+""});
-	// 						});
-	// 					});
-	// 					console.log("temp:::", temp.PriorityTask, list[index - 1].Id)
-
-						
-	// 					console.log("user:::", user.PriorityTask, list_id)
-						
-						
-	// 				});
-	// 			}
-				
-	// 		}else{
-	// 			var index = -1
-	// 			var value = 0
-	// 			for (var i = list.length - 1; i >= 0; i--) {
-	// 				if (list[i].Id == list_id){
-	// 					index = i
-	// 				}
-	// 			};
-	// 			if (index > -1 && index != list.length-1){
-	// 				var temp = Task.get({id:list[index + 1].Id}, function() {
-	// 					//
-	// 					value = temp.PriorityTask
-	// 					temp.PriorityTask = user.PriorityTask
-	// 					temp.$save({id:list[index + 1].Id},  function(){ 
-	// 						// 
-	// 						user.PriorityTask = value
-	// 						user.$save({id:list_id},  function(){ 
-	// 							//
-	// 							$scope.list = Task.query({direction:$routeParams.id, executed:""+$scope.executed+""});
-	// 						});
-	// 					});
-	// 				});
-	// 			}
-	// 		}
-			
-	// 	});	
-
-	// };
 
 	$scope.completed = function(id, completed) {
 		//
@@ -465,11 +406,7 @@ function TaskEditCtrl ($scope, $location, Task, Direction, $routeParams) {
 
 function ScheduleCtrl ($scope, $routeParams, Schedule, Statistic) {
 	// body...
-	$scope.list = Schedule.query({}, function() {
-		if($scope.list[0][0] +$scope.list[1][0] + $scope.list[2][0]+ $scope.list[3][0] == 'null'){
-			$scope.list= [] 
-		}
-	});
+	$scope.list = Schedule.query();
 	$scope.spisok_stat = Statistic.query();
 
 	$scope.completed = function(id, completed) {

@@ -39,6 +39,7 @@ type Direction struct {
 	DurationOstalos string   //сколько время осталось на задачи
 	IsWork          bool     //тру - направление отключено
 	HowLongDay      string   //сколько времени в день работать над направлением
+	Description		string   //описание проект - цель
 }
 
 //повторение
@@ -392,7 +393,7 @@ func NewDirection(name string) Direction {
 	_, ok := Direction_map[Direction_id]
 	if !ok {
 		res = Direction{Direction_id, name, find_max_priority_direction() + 100,
-			[]Period{Period{"9:00", "17:00"}}, "", "", false, "24h"}
+			[]Period{Period{"09:00", "17:00"}}, "", "", false, "24h", ""}
 		Direction_map[Direction_id] = res
 		//fmt.Printf("%d\n", Direction_id)
 		updateDirectionList()

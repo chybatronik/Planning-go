@@ -23,7 +23,7 @@
 
 <div class="container-fluid" style="margin-top:4em" ng-init="predicate='Priority';reverse=true">
 	<div class="row-fluid">
-		<div class="span8 offset1" style="margin-bottom:100px;height:300px">
+		<div class="span8 offset1" style="margin-bottom:100px">
 			<table class="table table-condensed table-hover">
 			  <thead>
 			    <tr>
@@ -43,18 +43,18 @@
 			  </tbody>
 			</table>
 		</div>
-		<div class="span2" ng-repeat="stat in spisok_stat">
-			<h5 ><z>{{stat.Date}}</z> <z class="pull-right">{{stat.Sum_Duration}}</z></h5>
-			<table class="table table-condensed table-hover">
-			  <thead>
-			  </thead>
-			  <tbody>
-			    <tr ng-repeat="lt in stat.List_Info_Direction">
-			    	<td><code>{{lt.Name}}</code></td>
-			    	<td width="2%">{{lt.Duration}}</td>
-			    </tr>
-			  </tbody>
-			</table>
+		<div class="span2">
+			<div ng-repeat="stat in spisok_stat">
+				<h5 ><z>{{stat.Date}}</z> <z class="pull-right">{{stat.Sum_Duration}}</z></h5>
+				<table class="table table-condensed table-hover">
+				  <tbody>
+				    <tr ng-repeat="lt in stat.List_Info_Direction">
+				    	<td><code>{{lt.Name}}</code></td>
+				    	<td class="pull-right">{{lt.Duration}}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
 		</div>	
 	</div>
 </div>
