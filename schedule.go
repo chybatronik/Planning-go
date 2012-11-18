@@ -223,7 +223,6 @@ func PrioritySchedule() []Schedule {
 				}
 			}
 
-			fmt.Printf("with_label_%d_%d:%v\n",i, k,  with_label)
 			for _, index := range mass_delete{
 				tasks = append(tasks[:index], tasks[index+1:]...)
 			}
