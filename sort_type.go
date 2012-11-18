@@ -7,7 +7,7 @@ func (s Tasks) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 type ByPriority_Tasks struct{ Tasks }
 
-func (s ByPriority_Tasks) Less(i, j int) bool { return s.Tasks[i].Priority > s.Tasks[j].Priority }
+func (s ByPriority_Tasks) Less(i, j int) bool { return  s.Tasks[i].Priority > s.Tasks[j].Priority }
 
 func convert_Task(tasks []Task) []*Task {
 	//

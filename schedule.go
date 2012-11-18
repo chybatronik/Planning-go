@@ -65,7 +65,6 @@ func scale(str_delta1, str_delta2 string) int {
 	if err != nil {
 		fmt.Println(err)
 	}
-	//fmt.Printf("int(delta1/delta2):%v\n", int(delta1/delta2))
 	return int(delta1 / delta2)
 }
 
@@ -142,8 +141,6 @@ func is_date_in_WhenWork(datetime string, WhenWork []Period) bool {
 		if err != nil {
 			fmt.Printf("%v\n", err)
 		}
-		//fmt.Printf("1:%v  2:%v  3%v  itog:%v\n", start.Unix(), dt.Unix(), stop.Unix(), (start.Unix() <= dt.Unix()) && (dt.Unix() <= stop.Unix()))
-		//fmt.Printf("1:%v  2:%v  3%v  itog:%v\n\n", val.Start, datetime, val.Stop, (start.Unix() <= dt.Unix()) && (dt.Unix() <= stop.Unix()))
 		if (start.Unix() <= dt.Unix()) && (dt.Unix() <= stop.Unix()) {
 			return true
 		}
@@ -178,7 +175,6 @@ func what_duration_direction_done(direction_id int, date time.Time) time.Duratio
 
 		}
 	}
-	//fmt.Printf("ID : %d    duration: %v\n", direction_id, result)
 	return result
 }
 
@@ -186,8 +182,6 @@ func PrioritySchedule() []Schedule {
 	//
 	var result []Schedule
 	var directions_list_filtering []Direction
-
-	//fmt.Printf("len(Direction_list):%d\n", len(Direction_list))
 
 	for _, val := range Direction_list {
 		if val.IsWork &&
@@ -197,14 +191,6 @@ func PrioritySchedule() []Schedule {
 		}
 	}
 	count_direction_in_day = len(directions_list_filtering)
-	//fmt.Printf("len(directions_list_filtering):%d\n", len(directions_list_filtering))
-	// if len(directions_list_filtering) < count_direction_in_day {
-	// 	count_direction_in_day = len(directions_list_filtering)
-	// } else {
-	// 	if len(directions_list_filtering) <= 3 {
-	// 		count_direction_in_day = len(directions_list_filtering)
-	// 	}
-	// }
 
 	directions := convert_Directions(directions_list_filtering)
 	sort.Sort(ByPriority_Directions{directions})
@@ -281,7 +267,7 @@ func Get_Schedule() []Schedule {
 	var result [][]Schedule
 
 	last_id_direction := SeachLastDirectionTaskIsDone()
-	//fmt.Printf("last_id_direction:%d\n", last_id_direction)
+
 	temp := make(map[int]int)
 	m15, _ := time.ParseDuration("15m")
 	now := time.Now().Add(-1 * m15)
@@ -310,12 +296,29 @@ func Get_Schedule() []Schedule {
 	}
 	var itog []Schedule
 	var max int
-	for _, val := range last_result {
+	for i, val := range last_result {
+
+
 		if len(val) > max {
 			max = len(val)
 		}
+
+		var temp []Schedule
+		var mass_delete []int
+
+		for j := 0; j < len(last_result[i]); j++ {
+			if val[j].Task.Label{
+				temp = append(temp, val[j])
+				mass_delete = append(mass_delete, j)				
+			}
+		}
+		for _, index := range mass_delete{
+			val = append(val[:index], val[index+1:]...)
+		}
+		
+		last_result[i] = append(temp, val...)
 	}
-	//fmt.Printf("last_do %d %d %v\n",last_id_direction, last_result[0][0].Task.Direction_Id, last_result )
+
 	if len(last_result) > 1 && len(last_result[0]) > 0 && len(last_result[1]) > 0 {
 		if last_result[0][0].Task.Direction_Id == last_id_direction {
 			temp := last_result[1]
@@ -323,7 +326,6 @@ func Get_Schedule() []Schedule {
 			last_result[0] = temp
 		}
 	}
-	//fmt.Printf("last_posle %d %d %v\n",last_id_direction, last_result[0][0].Task.Direction_Id, last_result )
 
 	map_HowLongDay := make(map[int]time.Duration)
 	delta, err := time.ParseDuration(duration_task_minute)
