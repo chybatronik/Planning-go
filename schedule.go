@@ -11,6 +11,7 @@ var (
 	count_direction_in_day = 3
 	last_hour, last_minute = 0, 0
 	duration_task_minute   = "0.5h"
+	duration_rest_minute   = "10m"
 
 	Work_schedule []Schedule
 )
@@ -348,6 +349,24 @@ func Get_Schedule() []Schedule {
 
 					map_HowLongDay[schedule.Task.Direction_Id] += delta
 					dt = dt.Add(delta)
+
+					//rest time 
+					itog = append(itog, Schedule{-1, Task{-1, "Relaxation", duration_rest_minute,
+													-1,
+													"Relaxation",
+													false,
+													0,
+													0,
+													false,
+													"0h",
+													time.Now().Format("2006-01-02 15:04:05"),
+													false,
+													Repeat{[]string{""}, "", -1}}, dt.Format("15:04"), false, 1})
+					delta_rest, err := time.ParseDuration(duration_rest_minute)
+					if err != nil {
+						fmt.Printf("duration_delta_rest: %v\n", err)
+					}
+					dt = dt.Add(delta_rest)
 				}
 			}
 		}

@@ -27,18 +27,18 @@
 			<table class="table table-condensed table-hover">
 			  <thead>
 			    <tr>
-			      <th>Start</th>
+			      <th >Start</th>
 			      <th></th>
 			      <th>Название</th>
 			      <th>Направление</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr ng-repeat="lt in list"  ng-class="{info:lt.Label}">
+			    <tr ng-repeat="lt in list"  ng-class="{info:lt.Label, transparent:(lt.Id == -1)}">
 			      <td>{{lt.Start}}</td>
-			      <td ><input type="checkbox" ng-model="lt.IsDone" ng-change="completed(lt.Id, lt.IsDone)"></input></td>
+			      <td><input type="checkbox" ng-hide="lt.Id == -1"  ng-model="lt.IsDone" ng-change="completed(lt.Id, lt.IsDone)"></input></td>
 			      <td ng-class="{done:lt.IsDone}">{{lt.Task.Name}}</td>
-			      <td><code><a href="#/task/direction/{{lt.Task.Direction_Id}}">{{lt.Task.Direction}}</a></code></td>
+			      <td><code ng-hide="lt.Id == -1" ><a href="#/task/direction/{{lt.Task.Direction_Id}}">{{lt.Task.Direction}}</a></code></td>
 			    </tr>
 			  </tbody>
 			</table>

@@ -2,6 +2,12 @@
 
  .done{text-decoration: line-through;}
 
+.transparent {
+    zoom: 1;
+    filter: alpha(opacity=70);
+    opacity: 0.5;
+}
+
 a{
 	text-decoration:none;
 	color: #D14;
