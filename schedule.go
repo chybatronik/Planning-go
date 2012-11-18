@@ -196,6 +196,8 @@ func PrioritySchedule() []Schedule {
 	sort.Sort(ByPriority_Directions{directions})
 	work_direction := directions[0:count_direction_in_day]
 
+
+
 	map_HowLongDay := make(map[int]time.Duration)
 
 	for k := 0; k < 12; k++ {
@@ -209,6 +211,25 @@ func PrioritySchedule() []Schedule {
 
 			tasks := convert_Task(GetTasks(direct.Id, false))
 			sort.Sort(ByPriority_Tasks{tasks})
+
+			//task with label on top in the list
+			var with_label []*Task
+			var mass_delete []int
+
+			for j := 0; j < len(tasks); j++ {
+				if tasks[j].Label{
+					with_label = append(with_label, tasks[j])
+					mass_delete = append(mass_delete, j)				
+				}
+			}
+
+			fmt.Printf("with_label_%d_%d:%v\n",i, k,  with_label)
+			for _, index := range mass_delete{
+				tasks = append(tasks[:index], tasks[index+1:]...)
+			}
+			
+			tasks = append(with_label, tasks...)
+
 			if k < len(tasks) {
 				task := *tasks[k]
 				if is_date_in_WhenWork(time.Now().Format("15:04"), GetDirection(task.Direction_Id).WhenWork) {
@@ -296,27 +317,11 @@ func Get_Schedule() []Schedule {
 	}
 	var itog []Schedule
 	var max int
-	for i, val := range last_result {
-
+	for _, val := range last_result {
 
 		if len(val) > max {
 			max = len(val)
 		}
-
-		var temp []Schedule
-		var mass_delete []int
-
-		for j := 0; j < len(last_result[i]); j++ {
-			if val[j].Task.Label{
-				temp = append(temp, val[j])
-				mass_delete = append(mass_delete, j)				
-			}
-		}
-		for _, index := range mass_delete{
-			val = append(val[:index], val[index+1:]...)
-		}
-		
-		last_result[i] = append(temp, val...)
 	}
 
 	if len(last_result) > 1 && len(last_result[0]) > 0 && len(last_result[1]) > 0 {
