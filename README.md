@@ -1,4 +1,8 @@
-For launch:
+Simple task manager for learning Golang, and Angular.js
 
-	- install go (http://golang.org/)
-	- sh ./run.bat or run.bat(for Windows)
+![Image of Yaktocat](https://github.com/chybatronik/Planning-go/thumbnail.png)
+
+For launch:
+- install go (http://golang.org/)
+- sh ./run.bat or run.bat(for Windows)
+
