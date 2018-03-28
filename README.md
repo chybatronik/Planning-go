@@ -1,6 +1,6 @@
 Simple task manager for learning Golang, and Angular.js
 
-![Image of Yaktocat](https://github.com/chybatronik/Planning-go/thumbnail.png)
+![Screen of Planning-go](https://github.com/chybatronik/Planning-go/blob/master/thumbnail.png)
 
 For launch:
 - install go (http://golang.org/)
